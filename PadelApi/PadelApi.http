@@ -1,0 +1,32 @@
+@PadelApi_HostAddress = http://localhost:5082
+
+### Login as Admin to get JWT cookie
+POST {{PadelApi_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@padel.com",
+  "password": "AdminPassword123!"
+}
+
+###
+
+### Create a Padel Racket (Run login first to get the auth cookie)
+POST {{PadelApi_HostAddress}}/api/products
+Content-Type: application/json
+
+{
+  "name": "Babolat Technical Viper 2024",
+  "description": "Explosive power and precision for attacking players.",
+  "price": 299.99,
+  "imageUrl": "https://example.com/babolat.jpg",
+  "stockQuantity": 15
+}
+
+###
+
+### Get All Products
+GET {{PadelApi_HostAddress}}/api/products
+Accept: application/json
+
+###

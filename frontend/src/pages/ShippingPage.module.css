@@ -1,0 +1,117 @@
+.pageContainer {
+  min-height: calc(100vh - 80px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 4rem 2rem;
+}
+
+.formContainer {
+  background-color: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  width: 100%;
+  max-width: 800px;
+  padding: 3rem;
+  box-shadow: var(--shadow-lg);
+}
+
+.header {
+  margin-bottom: 2rem;
+}
+
+.backLink {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+.backLink:hover {
+  color: var(--text-primary);
+}
+
+.pageTitle {
+  font-size: 2.5rem;
+  font-weight: 900;
+  margin: 0;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.tabsContainer {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  background-color: var(--bg-color);
+  padding: 0.5rem;
+  border-radius: var(--radius-md);
+}
+
+.tabBtn {
+  flex: 1;
+  padding: 1rem;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.activeTab {
+  background-color: var(--accent-color);
+  color: #000;
+  box-shadow: var(--shadow-sm);
+}
+
+.tabContent {
+  background-color: var(--bg-tertiary);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  min-height: 150px;
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--accent-color);
+}
+
+.collectionInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.locationHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.pinIcon {
+  color: var(--text-muted);
+}
+
+.locationTitle {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.locationAddress {
+  color: var(--text-secondary);
+  margin: 0 0 0.5rem 0;
+  line-height: 1.5;
+}
+
+.locationHours {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.continueBtn {
+  width: 100%;
+  padding: 1.25rem;
+  font-size: 1.125rem;
+}
