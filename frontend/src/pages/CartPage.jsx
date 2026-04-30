@@ -11,9 +11,10 @@ const CartPage = () => {
 
   return (
     <div className={styles.pageContainer}>
-      <div className={styles.cartContainer}>
-        <h1 className={styles.pageTitle}>ORDER SUMMARY</h1>
-        
+      <h1 className={styles.pageTitle}>ORDER SUMMARY</h1>
+      
+      <div className={styles.cartGrid}>
+        {/* Left Column: Items */}
         <div className={styles.itemsList}>
           {cartItems.map(item => (
             <div key={item.id} className={styles.cartItem}>
@@ -40,14 +41,29 @@ const CartPage = () => {
           ))}
           
           {cartItems.length === 0 && (
-            <p className={styles.emptyCart}>Your cart is empty.</p>
+            <div className={styles.emptyCart}>
+              <p>Your cart is empty.</p>
+              <button className="btn-secondary" onClick={() => navigate('/shop')} style={{marginTop: '1rem'}}>
+                Continue Shopping
+              </button>
+            </div>
           )}
         </div>
         
+        {/* Right Column: Summary */}
         {cartItems.length > 0 && (
           <div className={styles.summarySection}>
+            <h2 className={styles.summaryTitle}>Cart Totals</h2>
+            <div className={styles.summaryRow}>
+              <span>Subtotal</span>
+              <span>R {total.toLocaleString()}</span>
+            </div>
+            <div className={styles.summaryRow}>
+              <span>Shipping</span>
+              <span>Calculated at next step</span>
+            </div>
             <div className={styles.totalRow}>
-              <span className={styles.totalLabel}>Total:</span>
+              <span className={styles.totalLabel}>Total</span>
               <span className={styles.totalValue}>R {total.toLocaleString()}</span>
             </div>
             
@@ -55,7 +71,7 @@ const CartPage = () => {
               className={`btn-primary ${styles.continueBtn}`} 
               onClick={() => navigate('/shipping')}
             >
-              Continue to Shipping
+              Checkout Securely
             </button>
           </div>
         )}

@@ -1,33 +1,44 @@
 .card {
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
+  background: rgba(30, 30, 30, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-lg);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   width: 100%;
   max-width: 400px;
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.6), 0 0 15px rgba(202, 255, 0, 0.2);
+  border-color: rgba(202, 255, 0, 0.3);
 }
 
 .imageContainer {
+  position: relative;
   padding: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #222222; /* Slightly different shade for image area */
-  border-bottom: 1px solid var(--border-color);
+  background: linear-gradient(180deg, rgba(40,40,40,1) 0%, rgba(20,20,20,1) 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+  overflow: hidden;
 }
 
 .image {
   max-width: 100%;
   height: 250px;
   object-fit: contain;
+  transition: transform 0.5s ease;
+  z-index: 2;
+}
+
+.card:hover .image {
+  transform: scale(1.08);
 }
 
 .content {
@@ -38,24 +49,27 @@
 }
 
 .title {
-  font-size: 1.25rem;
-  font-weight: 700;
+  font-size: 1.3rem;
+  font-weight: 800;
   margin: 0 0 0.5rem 0;
+  color: var(--text-primary);
+  letter-spacing: 0.5px;
 }
 
 .description {
   color: var(--text-secondary);
-  font-size: 0.9rem;
-  margin: 0 0 1rem 0;
-  line-height: 1.4;
+  font-size: 0.95rem;
+  margin: 0 0 1.25rem 0;
+  line-height: 1.5;
   flex: 1;
 }
 
 .price {
   color: var(--accent-color);
-  font-size: 1.25rem;
-  font-weight: 700;
+  font-size: 1.4rem;
+  font-weight: 900;
   margin: 0 0 1.5rem 0;
+  text-shadow: 0 0 10px rgba(202, 255, 0, 0.1);
 }
 
 .actions {
@@ -68,31 +82,62 @@
   background-color: var(--accent-color);
   color: #000000;
   border: none;
-  border-radius: 6px;
-  padding: 0.8rem;
+  border-radius: var(--radius-md);
+  padding: 0.9rem;
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 800;
+  text-transform: uppercase;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .addToCartBtn:hover {
   background-color: var(--accent-hover);
+  box-shadow: var(--shadow-neon);
+  transform: translateY(-2px);
 }
 
 .wishlistBtn {
   background-color: transparent;
   color: var(--text-secondary);
   border: 1px solid var(--border-color);
-  border-radius: 6px;
+  border-radius: var(--radius-md);
   padding: 0.8rem;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .wishlistBtn:hover {
   color: var(--text-primary);
-  border-color: var(--text-secondary);
+  border-color: rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.05);
 }
+
+@media (max-width: 768px) {
+  .image {
+    height: 180px;
+  }
+
+  .imageContainer {
+    padding: 1.25rem;
+  }
+
+  .content {
+    padding: 1.1rem;
+  }
+
+  .title {
+    font-size: 1.1rem;
+  }
+
+  .price {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+}
+

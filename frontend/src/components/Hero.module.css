@@ -1,14 +1,15 @@
 .heroSection {
-  position: relative;
-  min-height: 80vh;
+  min-height: 90vh;
   display: flex;
   align-items: center;
-  padding: 4rem 2rem;
-  background-image: url('/hero-bg.png'); /* We will assume the file is copied here manually or later */
+  position: relative;
+  background-color: var(--bg-color);
+  background-image: url('/padel-app/hero-bg.png'); /* Fix for GitHub Pages sub-path */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   overflow: hidden;
+  padding: 6rem 2rem 4rem;
 }
 
 .overlay {
@@ -29,12 +30,13 @@
 }
 
 .headline {
-  font-size: 4rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 5.5rem;
   font-weight: 900;
-  line-height: 1.1;
+  line-height: 1.0;
   margin: 0 0 1.5rem 0;
   text-transform: uppercase;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
 .highlight {
@@ -92,13 +94,37 @@
 }
 
 @media (max-width: 768px) {
+  .heroSection {
+    padding: 5rem 1.25rem 3rem;
+    min-height: 75vh;
+  }
   .headline {
-    font-size: 3rem;
+    font-size: 3.5rem;
+  }
+  .subtext {
+    font-size: 1rem;
+    margin-bottom: 2rem;
   }
   .timerContainer {
     flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 2rem;
   }
   .timeBox {
     flex: 1 1 calc(50% - 0.5rem);
+    min-width: 70px;
+    padding: 0.75rem;
+  }
+  .timeValue {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .headline {
+    font-size: 2.75rem;
+  }
+  .ctaBtn {
+    max-width: 100%;
   }
 }

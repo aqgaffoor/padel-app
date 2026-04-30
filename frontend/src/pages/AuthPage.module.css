@@ -1,0 +1,218 @@
+.page {
+  min-height: 100vh;
+  background: var(--bg-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.25rem;
+}
+
+.card {
+  background: rgba(20, 20, 20, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 20px;
+  padding: 3rem 2.5rem;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+}
+
+.logo {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 2.25rem;
+  font-weight: 900;
+  color: var(--accent-color);
+  letter-spacing: -1px;
+  text-align: center;
+  margin-bottom: 0.25rem;
+}
+
+.tagline {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  margin: 0 0 2rem;
+}
+
+/* ── Tabs ── */
+.tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 10px;
+  padding: 4px;
+  margin-bottom: 1.75rem;
+}
+
+.tab {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 0.6rem 0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tabActive {
+  background: var(--accent-color);
+  color: #000;
+}
+
+/* ── Alerts ── */
+.errorBox {
+  background: rgba(255, 68, 68, 0.08);
+  border: 1px solid rgba(255, 68, 68, 0.3);
+  color: #ff6b6b;
+  padding: 0.75rem 1rem;
+  border-radius: 9px;
+  font-size: 0.88rem;
+  margin-bottom: 1.25rem;
+  line-height: 1.5;
+}
+
+.successBox {
+  background: rgba(40, 167, 69, 0.08);
+  border: 1px solid rgba(40, 167, 69, 0.3);
+  color: #28a745;
+  padding: 0.75rem 1rem;
+  border-radius: 9px;
+  font-size: 0.88rem;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  line-height: 1.5;
+}
+
+/* ── Form ── */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.inputWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 0.85rem;
+  color: var(--text-muted);
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 9px;
+  padding: 0.75rem 2.75rem 0.75rem 2.5rem;
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(202, 255, 0, 0.08);
+}
+
+.input::placeholder {
+  color: #444;
+}
+
+.eyeBtn {
+  position: absolute;
+  right: 0.85rem;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s ease;
+}
+
+.eyeBtn:hover { color: var(--text-secondary); }
+
+.privacy {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: center;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ── Submit button ── */
+.submitBtn {
+  background: var(--accent-color);
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  padding: 0.9rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+  margin-top: 0.25rem;
+}
+
+.submitBtn:hover:not(:disabled) {
+  background: var(--accent-hover);
+  box-shadow: 0 0 20px rgba(202, 255, 0, 0.3);
+  transform: translateY(-1px);
+}
+
+.submitBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .card {
+    padding: 2rem 1.5rem;
+  }
+
+  .row {
+    grid-template-columns: 1fr;
+  }
+}

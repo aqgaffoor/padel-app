@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import ProductCard from './ProductCard';
 import styles from './ProductList.module.css';
+import { supabase } from '../lib/supabase';
+
+const basePath = import.meta.env.BASE_URL;
 
 const mockProducts = [
   {
@@ -8,13 +11,13 @@ const mockProducts = [
     name: 'Wilson Carbon Force',
     description: 'Perfect for control-oriented players looking for a soft feel.',
     price: 3499.00,
-    imageUrl: '/images/wilson-1.jpg',
+    imageUrl: `${basePath}images/wilson-1.jpg`,
     images: [
-      '/images/wilson-1.jpg',
-      '/images/wilson-2.jpg',
-      '/images/wilson-3.jpg',
-      '/images/wilson-4.jpg',
-      '/images/wilson-5.jpg'
+      `${basePath}images/wilson-1.jpg`,
+      `${basePath}images/wilson-2.jpg`,
+      `${basePath}images/wilson-3.jpg`,
+      `${basePath}images/wilson-4.jpg`,
+      `${basePath}images/wilson-5.jpg`
     ],
     specs: {
       brand: 'Wilson',
@@ -31,13 +34,13 @@ const mockProducts = [
     name: 'Babolat Technical Viper',
     description: 'Designed for the explosive attacker. High power for aggressive smashes.',
     price: 4200.00,
-    imageUrl: '/images/babolat-1.jpg',
+    imageUrl: `${basePath}images/babolat-1.jpg`,
     images: [
-      '/images/babolat-1.jpg',
-      '/images/babolat-2.jpg',
-      '/images/babolat-3.jpg',
-      '/images/babolat-4.jpg',
-      '/images/babolat-5.jpg'
+      `${basePath}images/babolat-1.jpg`,
+      `${basePath}images/babolat-2.jpg`,
+      `${basePath}images/babolat-3.jpg`,
+      `${basePath}images/babolat-4.jpg`,
+      `${basePath}images/babolat-5.jpg`
     ],
     specs: {
       brand: 'Babolat',
@@ -53,22 +56,44 @@ const mockProducts = [
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Attempt to fetch from API, fallback to mock data if API is not running or empty
-    fetch('https://localhost:7124/api/products')
-      .then(res => res.json())
-      .then(data => {
-        if (data && data.length > 0) {
-          setProducts(data);
-        } else {
-          setProducts(mockProducts);
-        }
-      })
-      .catch(() => {
-        setProducts(mockProducts);
-      });
+    fetchFromSupabase();
   }, []);
+
+  const fetchFromSupabase = async () => {
+    setIsLoading(true);
+    try {
+      const { data, error } = await supabase
+        .from('products')
+        .select('*')
+        .order('id', { ascending: true });
+
+      if (error) throw error;
+
+      if (data && data.length > 0) {
+        // Fix any relative image paths to use the correct basePath
+        const fixedData = data.map(item => {
+          let newImageUrl = item.imageUrl;
+          if (newImageUrl && newImageUrl.startsWith('/images/')) {
+            newImageUrl = basePath + newImageUrl.substring(1);
+          } else if (newImageUrl && newImageUrl.startsWith('/padel-app/images/')) {
+            // Already correct - keep as is
+          }
+          return { ...item, imageUrl: newImageUrl };
+        });
+        setProducts(fixedData);
+      } else {
+        setProducts(mockProducts);
+      }
+    } catch (err) {
+      console.error('Supabase fetch failed, falling back to mock data:', err);
+      setProducts(mockProducts);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -76,11 +101,15 @@ const ProductList = () => {
         <h1 className={styles.title}>PRO RACKET SHOP</h1>
         <p className={styles.subtitle}>Click on a racket to view full details and technical specifications.</p>
       </div>
-      <div className={styles.grid}>
-        {products.map(product => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
+      {isLoading ? (
+        <div className={styles.loading}>Loading products...</div>
+      ) : (
+        <div className={styles.grid}>
+          {products.map(product => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

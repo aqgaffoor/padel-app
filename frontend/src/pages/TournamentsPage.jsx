@@ -29,19 +29,31 @@ const TournamentsPage = () => {
       </div>
 
       <div className={styles.grid}>
-        {tournaments.map((tournament) => (
-          <div key={tournament.id} className={styles.card}>
-            <div className={styles.date}>{tournament.date}</div>
-            <h2 className={styles.cardTitle}>{tournament.title}</h2>
-            <p className={styles.cardDescription}>{tournament.description}</p>
-            <div className={styles.location}>
-              <span>📍</span> {tournament.location}
+        {tournaments.map((tournament) => {
+          const [day, ...rest] = tournament.date.split(' ');
+          const monthYear = rest.join(' ');
+          
+          return (
+            <div key={tournament.id} className={styles.card}>
+              <div className={styles.dateBox}>
+                <span className={styles.dateDay}>{day}</span>
+                <span className={styles.dateMonthYear}>{monthYear}</span>
+              </div>
+              <div className={styles.cardContent}>
+                <h2 className={styles.cardTitle}>{tournament.title}</h2>
+                <p className={styles.cardDescription}>{tournament.description}</p>
+                <div className={styles.cardFooter}>
+                  <div className={styles.location}>
+                    <span>📍</span> {tournament.location}
+                  </div>
+                  <button className={`btn-primary ${styles.enterBtn}`}>
+                    Enter Now
+                  </button>
+                </div>
+              </div>
             </div>
-            <button className={`btn-primary ${styles.enterBtn}`}>
-              Enter Now
-            </button>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

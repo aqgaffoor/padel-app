@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
 import { Lock } from 'lucide-react';
+import { supabase } from '../lib/supabase';
 import styles from './PaymentPage.module.css';
 
+
 const PaymentPage = () => {
-  const { getCartTotal, cartItems } = useCart();
+  const { getCartTotal, cartItems, clearCart } = useCart();
+  const { user } = useAuth();
   const navigate = useNavigate();
   const [isProcessing, setIsProcessing] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+
   
   const [cardDetails, setCardDetails] = useState({
     name: '',
@@ -32,13 +37,26 @@ const PaymentPage = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handlePayment = (e) => {
+  const handlePayment = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
     
     setIsProcessing(true);
-    // Simulate secure Paygate API call
-    setTimeout(() => {
+    // Simulate secure payment processing delay
+    setTimeout(async () => {
+      // Save order to Supabase
+      const orderPayload = {
+        customer_name: cardDetails.name,
+        items: cartItems.map(i => ({ name: i.name, quantity: i.quantity, price: i.price })),
+        total: total,
+        status: 'completed',
+      };
+      if (user?.id) orderPayload.user_id = user.id;
+
+      await supabase.from('orders').insert([orderPayload]);
+
+
+      clearCart();
       setIsProcessing(false);
       setIsSuccess(true);
     }, 2500);
@@ -76,9 +94,13 @@ const PaymentPage = () => {
           <p className={styles.successMessage}>
             Thank you for your order! Your padel gear will be processed and shipped shortly.
           </p>
-          <Link to="/" className={`btn-primary ${styles.homeBtn}`}>
+          <Link to="/account" className={`btn-primary ${styles.homeBtn}`}>
+            View Order History
+          </Link>
+          <Link to="/" className={styles.backLink} style={{ marginTop: '1rem', display: 'block', textAlign: 'center' }}>
             Return to Home
           </Link>
+
         </div>
       </div>
     );

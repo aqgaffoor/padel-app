@@ -173,6 +173,7 @@
 @media (max-width: 900px) {
   .productWrapper {
     flex-direction: column;
+    gap: 2rem;
   }
   
   .gallery {
@@ -184,3 +185,18 @@
     justify-content: center;
   }
 }
+
+@media (max-width: 600px) {
+  .pageContainer {
+    padding: 2rem 1.25rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .mainImageContainer {
+    padding: 1.5rem;
+  }
+}
+
