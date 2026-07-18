@@ -1,0 +1,239 @@
+.footer {
+  background: #0a0a0a;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  margin-top: 6rem;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5rem 2rem 0;
+}
+
+/* ── Top Grid ── */
+.topGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 4rem;
+  padding-bottom: 4rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ── Brand Column ── */
+.brandCol {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--accent-color);
+  letter-spacing: -1px;
+  display: inline-block;
+  text-shadow: 0 0 20px rgba(202, 255, 0, 0.25);
+}
+
+.brandDesc {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  margin: 0;
+  max-width: 300px;
+}
+
+.socials {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.socialBtn {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+}
+
+.socialBtn:hover {
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+  color: #000;
+  transform: translateY(-2px);
+}
+
+/* ── Nav Column ── */
+.navCol {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.colTitle {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.navList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.navLink {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.navLink:hover {
+  color: var(--accent-color);
+}
+
+/* ── Contact Column ── */
+.contactList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.contactItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  font-weight: 400;
+  transition: color 0.2s ease;
+}
+
+a.contactItem:hover {
+  color: var(--text-secondary);
+}
+
+.contactIcon {
+  color: var(--accent-color);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ── CTA Strip ── */
+.ctaStrip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 2rem 2.5rem;
+  background: rgba(202, 255, 0, 0.05);
+  border: 1px solid rgba(202, 255, 0, 0.1);
+  border-radius: 16px;
+  margin: 3rem 0;
+  flex-wrap: wrap;
+}
+
+.ctaText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.ctaText span {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.ctaText strong {
+  font-size: 1.1rem;
+  color: #fff;
+  font-weight: 700;
+}
+
+.ctaBtn {
+  background: var(--accent-color);
+  color: #000;
+  font-weight: 800;
+  font-size: 0.9rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.ctaBtn:hover {
+  background: var(--accent-hover);
+  box-shadow: 0 8px 24px rgba(202, 255, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+/* ── Bottom Bar ── */
+.bottomBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.75rem 0 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.copyright {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.legalLinks {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.legalLink {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  transition: color 0.2s ease;
+}
+
+.legalLink:hover {
+  color: var(--text-secondary);
+}
+
+.dot {
+  color: rgba(255,255,255,0.15);
+  font-size: 0.8rem;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .topGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+  .brandCol { grid-column: 1 / -1; }
+}
+
+@media (max-width: 640px) {
+  .container { padding: 3rem 1.25rem 0; }
+  .topGrid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .brandCol { grid-column: 1; }
+  .ctaStrip { padding: 1.5rem; }
+  .bottomBar { flex-direction: column; text-align: center; }
+}

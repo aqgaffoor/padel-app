@@ -5,27 +5,60 @@
   align-items: center;
   justify-content: center;
   padding: 2rem 1.25rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.bgOrbs {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.orb1 {
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(202, 255, 0, 0.07) 0%, transparent 70%);
+}
+
+.orb2 {
+  position: absolute;
+  bottom: -20%;
+  left: -10%;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(202, 255, 0, 0.04) 0%, transparent 70%);
 }
 
 .card {
-  background: rgba(20, 20, 20, 0.95);
+  position: relative;
+  z-index: 1;
+  background: rgba(18, 18, 18, 0.97);
   border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 20px;
+  border-radius: 24px;
   padding: 3rem 2.5rem;
   width: 100%;
   max-width: 480px;
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(202,255,0,0.03);
+  backdrop-filter: blur(20px);
 }
 
 .logo {
   display: block;
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: 2.25rem;
+  font-size: 2.5rem;
   font-weight: 900;
   color: var(--accent-color);
   letter-spacing: -1px;
   text-align: center;
   margin-bottom: 0.25rem;
+  text-shadow: 0 0 30px rgba(202, 255, 0, 0.3);
 }
 
 .tagline {
@@ -40,9 +73,10 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   background: rgba(255, 255, 255, 0.04);
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 4px;
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(255,255,255,0.05);
 }
 
 .tab {
@@ -51,15 +85,67 @@
   color: var(--text-muted);
   font-size: 0.9rem;
   font-weight: 700;
-  padding: 0.6rem 0;
-  border-radius: 8px;
+  padding: 0.65rem 0;
+  border-radius: 9px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
+}
+
+.tab:hover:not(.tabActive) {
+  color: var(--text-secondary);
 }
 
 .tabActive {
   background: var(--accent-color);
   color: #000;
+  box-shadow: 0 2px 12px rgba(202, 255, 0, 0.3);
+}
+
+/* ── Demo Banner ── */
+.demoBanner {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(202, 255, 0, 0.06);
+  border: 1px solid rgba(202, 255, 0, 0.2);
+  border-radius: 10px;
+  padding: 0.7rem 1rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.demoIcon {
+  color: var(--accent-color);
+  flex-shrink: 0;
+}
+
+.demoText {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  flex: 1;
+  line-height: 1.4;
+}
+
+.demoText strong {
+  color: var(--accent-color);
+}
+
+.demoFillBtn {
+  background: var(--accent-color);
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  padding: 0.3rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.demoFillBtn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
 }
 
 /* ── Alerts ── */
@@ -68,7 +154,7 @@
   border: 1px solid rgba(255, 68, 68, 0.3);
   color: #ff6b6b;
   padding: 0.75rem 1rem;
-  border-radius: 9px;
+  border-radius: 10px;
   font-size: 0.88rem;
   margin-bottom: 1.25rem;
   line-height: 1.5;
@@ -77,9 +163,9 @@
 .successBox {
   background: rgba(40, 167, 69, 0.08);
   border: 1px solid rgba(40, 167, 69, 0.3);
-  color: #28a745;
+  color: #4caf74;
   padding: 0.75rem 1rem;
-  border-radius: 9px;
+  border-radius: 10px;
   font-size: 0.88rem;
   margin-bottom: 1.25rem;
   display: flex;
@@ -108,11 +194,11 @@
 }
 
 .label {
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   font-weight: 700;
   color: var(--text-secondary);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
 }
 
 .inputWrap {
@@ -123,7 +209,7 @@
 
 .inputIcon {
   position: absolute;
-  left: 0.85rem;
+  left: 0.9rem;
   color: var(--text-muted);
   pointer-events: none;
   flex-shrink: 0;
@@ -133,23 +219,24 @@
   width: 100%;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 9px;
-  padding: 0.75rem 2.75rem 0.75rem 2.5rem;
+  border-radius: 10px;
+  padding: 0.8rem 2.75rem 0.8rem 2.6rem;
   color: #fff;
   font-family: inherit;
   font-size: 0.95rem;
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
   box-sizing: border-box;
 }
 
 .input:focus {
   outline: none;
   border-color: var(--accent-color);
+  background: rgba(202, 255, 0, 0.03);
   box-shadow: 0 0 0 3px rgba(202, 255, 0, 0.08);
 }
 
 .input::placeholder {
-  color: #444;
+  color: #3a3a3a;
 }
 
 .eyeBtn {
@@ -180,12 +267,12 @@
   background: var(--accent-color);
   color: #000;
   border: none;
-  border-radius: 10px;
-  padding: 0.9rem 1.5rem;
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
   font-size: 0.95rem;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -193,12 +280,17 @@
   gap: 0.5rem;
   transition: all 0.2s ease;
   margin-top: 0.25rem;
+  width: 100%;
 }
 
 .submitBtn:hover:not(:disabled) {
   background: var(--accent-hover);
-  box-shadow: 0 0 20px rgba(202, 255, 0, 0.3);
-  transform: translateY(-1px);
+  box-shadow: 0 0 25px rgba(202, 255, 0, 0.35);
+  transform: translateY(-2px);
+}
+
+.submitBtn:active:not(:disabled) {
+  transform: translateY(0);
 }
 
 .submitBtn:disabled {

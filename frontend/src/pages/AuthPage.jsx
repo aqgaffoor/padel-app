@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Eye, EyeOff, User, Mail, Phone, Lock, ArrowRight, CheckCircle } from 'lucide-react';
+import { Eye, EyeOff, User, Mail, Phone, Lock, ArrowRight, CheckCircle, Zap } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import styles from './AuthPage.module.css';
 
@@ -53,7 +53,7 @@ const AuthPage = () => {
   const { signIn, signUp } = useAuth();
   const navigate = useNavigate();
 
-  const [tab, setTab] = useState('signin'); // 'signin' | 'signup'
+  const [tab, setTab] = useState('signin');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
@@ -70,6 +70,11 @@ const AuthPage = () => {
   const [suPass, setSuPass] = useState('');
   const [suConfirm, setSuConfirm] = useState('');
 
+  const fillDemo = () => {
+    setSiEmail('demo@padel.co.za');
+    setSiPass('Demo1234!');
+  };
+
   const handleSignIn = async (e) => {
     e.preventDefault();
     setError(''); setLoading(true);
@@ -77,7 +82,7 @@ const AuthPage = () => {
       await signIn({ email: siEmail, password: siPass });
       navigate('/account');
     } catch (err) {
-      setError(err.message || 'Sign in failed. Check your email and password.');
+      setError(err.message || 'Sign in failed. Check your credentials or use demo login.');
     } finally {
       setLoading(false);
     }
@@ -102,6 +107,11 @@ const AuthPage = () => {
 
   return (
     <div className={styles.page}>
+      <div className={styles.bgOrbs}>
+        <div className={styles.orb1} />
+        <div className={styles.orb2} />
+      </div>
+
       <div className={styles.card}>
         {/* Logo */}
         <Link to="/" className={styles.logo}>PADEL.</Link>
@@ -109,13 +119,32 @@ const AuthPage = () => {
 
         {/* Tabs */}
         <div className={styles.tabs}>
-          <button className={`${styles.tab} ${tab === 'signin' ? styles.tabActive : ''}`} onClick={() => { setTab('signin'); setError(''); setSuccess(''); }}>
+          <button
+            className={`${styles.tab} ${tab === 'signin' ? styles.tabActive : ''}`}
+            onClick={() => { setTab('signin'); setError(''); setSuccess(''); }}
+          >
             Sign In
           </button>
-          <button className={`${styles.tab} ${tab === 'signup' ? styles.tabActive : ''}`} onClick={() => { setTab('signup'); setError(''); setSuccess(''); }}>
+          <button
+            className={`${styles.tab} ${tab === 'signup' ? styles.tabActive : ''}`}
+            onClick={() => { setTab('signup'); setError(''); setSuccess(''); }}
+          >
             Create Account
           </button>
         </div>
+
+        {/* Demo Banner */}
+        {tab === 'signin' && (
+          <div className={styles.demoBanner}>
+            <Zap size={14} className={styles.demoIcon} />
+            <span className={styles.demoText}>
+              Demo mode: <strong>demo@padel.co.za</strong> / <strong>Demo1234!</strong>
+            </span>
+            <button type="button" className={styles.demoFillBtn} onClick={fillDemo}>
+              Auto-fill
+            </button>
+          </div>
+        )}
 
         {/* Alerts */}
         {error   && <div className={styles.errorBox}>{error}</div>}
@@ -145,7 +174,7 @@ const AuthPage = () => {
               <Field label="Last Name"  icon={User} value={suLast}  onChange={e => setSuLast(e.target.value)}  placeholder="Smith"  required autoComplete="family-name" />
             </div>
             <Field label="Email Address" icon={Mail}  type="email" value={suEmail} onChange={e => setSuEmail(e.target.value)} placeholder="you@example.com" required autoComplete="email" />
-            <Field label="Phone Number (optional)" icon={Phone} type="tel"   value={suPhone} onChange={e => setSuPhone(e.target.value)} placeholder="+27 82 000 0000" autoComplete="tel" />
+            <Field label="Phone Number (optional)" icon={Phone} type="tel" value={suPhone} onChange={e => setSuPhone(e.target.value)} placeholder="+27 82 000 0000" autoComplete="tel" />
             <PasswordField label="Password (min. 8 characters)" value={suPass}    onChange={e => setSuPass(e.target.value)}    placeholder="Create a password"  autoComplete="new-password" />
             <PasswordField label="Confirm Password"              value={suConfirm} onChange={e => setSuConfirm(e.target.value)} placeholder="Repeat your password" autoComplete="new-password" />
 
